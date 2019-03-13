@@ -1,6 +1,11 @@
 package it.sovy.validateDocument;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -136,5 +141,32 @@ public class Database {
             e.printStackTrace();
         }
         return people;
+    }
+
+
+    public List<Person> getAllAdults(){
+        Connection connect=getConnetion();
+        String query = "select * from person  where dateOfBirth <= curdate() - interval 18 year";
+
+        List<Person> people = new ArrayList<>();
+        ResultSet res;
+        try {
+            PreparedStatement statement = connect.prepareStatement(query);
+            res= statement.executeQuery();
+            while(res.next()){
+                    String  firstName = res.getString("name");
+                    String  lastName = res.getString("surname");
+                    Date dateCreated = res.getDate("dateOfBirth");
+                    String birthNumber = res.getString("pin");
+                    Person clovek = new Person(firstName,lastName,dateCreated,birthNumber);
+                    people.add(clovek);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return  people;
     }
 }

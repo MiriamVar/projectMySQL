@@ -64,6 +64,10 @@ public class Main {
             System.out.println(persons.get(i).getName()+" "+persons.get(i).getSurname()+" "+persons.get(i).getDateOfBirth()+" "+persons.get(i).getPin());
         }
 
+        List<Person> persons2 = database.getAllAdults();
+        for (int i=0;i<persons2.size();i++){
+            System.out.println(persons2.get(i).getName()+" "+persons2.get(i).getSurname()+" "+persons2.get(i).getDateOfBirth()+" "+persons2.get(i).getPin());
+        }
     }
 
 }
