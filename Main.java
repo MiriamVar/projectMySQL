@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args ) throws FileNotFoundException {
@@ -68,6 +66,13 @@ public class Main {
         for (int i=0;i<persons2.size();i++){
             System.out.println(persons2.get(i).getName()+" "+persons2.get(i).getSurname()+" "+persons2.get(i).getDateOfBirth()+" "+persons2.get(i).getPin());
         }
+
+        Set<String> persons3 = database.getAllFirstNames();
+        System.out.println(persons3);
+        for(String ccc: persons3){
+            System.out.println(ccc);
+        }
+
     }
 
 }

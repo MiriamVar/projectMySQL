@@ -1,12 +1,11 @@
 package it.sovy.validateDocument;
 import java.sql.*;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 
 public class Database {
@@ -168,5 +167,28 @@ public class Database {
 
 
         return  people;
+    }
+
+
+    public Set<String> getAllFirstNames(){
+        Connection connect=getConnetion();
+        String query = "select name from person";
+        Set<String> people = new HashSet<>();
+        ResultSet res;
+        try {
+            PreparedStatement statement = connect.prepareStatement(query);
+            res= statement.executeQuery();
+            while(res.next()){
+                String  firstName = res.getString("name");
+                people.add(firstName);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+        return people;
     }
 }
