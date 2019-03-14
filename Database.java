@@ -191,4 +191,31 @@ public class Database {
 
         return people;
     }
+
+    public List<Person> getAllPersons() {
+        Connection connect = getConnetion();
+        String query = "select * from person";
+
+        List<Person> people = new ArrayList<>();
+        ResultSet res;
+        try {
+            PreparedStatement statement = connect.prepareStatement(query);
+            res = statement.executeQuery();
+            while (res.next()) {
+                String firstName = res.getString("name");
+                String lastName = res.getString("surname");
+                Date dateCreated = res.getDate("dateOfBirth");
+                String birthNumber = res.getString("pin");
+                Person clovek = new Person(firstName, lastName, dateCreated, birthNumber);
+                people.add(clovek);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return people;
+
+    }
 }
